@@ -1,4 +1,3 @@
-{%- from 'hbase/settings.sls' import hbase with context %}
 #!/bin/bash
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
@@ -31,6 +30,7 @@
 # Should-Start:
 # Should-Stop:
 ### END INIT INFO
+{%- from 'hbase/settings.sls' import hbase with context %}
 
 . /lib/lsb/init-functions
 if [ -f /etc/default/hadoop ]; then
