@@ -50,7 +50,7 @@ unpack-hbase-dist:
     - mode: 644
     - contents: |
 {%- for slave in hbase.regionserver_hosts %}
-        {{ slave }}
+        {{ salt['mine.get'](slave, 'grains.items')[slave]['fqdn'] }}
 {%- endfor %}
 
 
