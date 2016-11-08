@@ -7,7 +7,8 @@
 {%- set regionserver_target     = g.get('regionserver_target', p.get('regionserver_target', 'roles:hadoop_slave')) %}
 # this is a deliberate duplication as to not re-import hadoop/settings multiple times
 {%- set targeting_method    = salt['grains.get']('hadoop:targeting_method', salt['pillar.get']('hadoop:targeting_method', 'grain')) %}
-{%- set namenode_host       = salt['mine.get'](master_target, 'network.interfaces', expr_form=targeting_method)|first %}
+{%- set namenode_id       = salt['mine.get'](master_target, 'network.interfaces', expr_form=targeting_method)|first %}
+{%- set namenode_host       = salt['mine.get'](namenode_id, 'grains.items')[namenode_id]['fqdn'] %}
 {%- set regionservers      = salt['mine.get'](regionserver_target, 'network.interfaces', expr_form=targeting_method).keys() %}
 {%- set namenode_port       = gc.get('namenode_port', pc.get('namenode_port', '8020')) %}
 
